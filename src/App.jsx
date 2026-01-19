@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import LoginSignup from './pages/LoginSignup';
@@ -20,7 +20,7 @@ import SearchResults from './components/SearchResults';
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <Navbar />
         <div className="page-content">
           <Routes>
@@ -44,7 +44,7 @@ function App() {
           </Routes>
         </div>
         <Footer />
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }
