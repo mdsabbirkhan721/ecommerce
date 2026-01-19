@@ -2,8 +2,9 @@ import { FaShoppingCart, FaUserCircle, FaHeart } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-const base = import.meta.env.BASE_URL;
+import { Collapse } from 'bootstrap';
 
+const base = import.meta.env.BASE_URL;
 const Navbar = () => {
   const cart = useSelector((store) => store.cart);
   const wishListItem = useSelector((state) => state.wishlist);
@@ -19,6 +20,13 @@ const Navbar = () => {
 
     navigate(`/search?q=${encodeURIComponent(searchTerm)}`);
     setSearchTerm('');
+  };
+  const handleNavLinkClick = () => {
+    const navCollapse = document.getElementById('navbarSupportedContent');
+    if (navCollapse.classList.contains('show')) {
+      const bsCollapse = new Collapse(navCollapse, { toggle: true });
+      bsCollapse.hide();
+    }
   };
 
   return (
@@ -49,32 +57,57 @@ const Navbar = () => {
         >
           <ul className="navbar-nav mx-auto">
             <li className="nav-item">
-              <Link className="nav-link active" to="/home">
+              <Link
+                className="nav-link active"
+                to="/home"
+                onClick={handleNavLinkClick}
+              >
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/shirt">
+              <Link
+                className="nav-link"
+                to="/shirt"
+                onClick={handleNavLinkClick}
+              >
                 Shirt
               </Link>
             </li>
+
             <li className="nav-item">
-              <Link className="nav-link" to="/tshirt">
+              <Link
+                className="nav-link"
+                to="/tshirt"
+                onClick={handleNavLinkClick}
+              >
                 T-Shirt
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/punjabi">
+              <Link
+                className="nav-link"
+                to="/punjabi"
+                onClick={handleNavLinkClick}
+              >
                 Punjabi
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/hoodie">
+              <Link
+                className="nav-link"
+                to="/hoodie"
+                onClick={handleNavLinkClick}
+              >
                 Hoodie
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/contact">
+              <Link
+                className="nav-link"
+                to="/contact"
+                onClick={handleNavLinkClick}
+              >
                 Contact
               </Link>
             </li>
@@ -93,18 +126,30 @@ const Navbar = () => {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button className="btn btn-success btn-sm" type="submit">
+            <button
+              className="btn btn-success btn-sm"
+              type="submit"
+              onClick={handleNavLinkClick}
+            >
               Search
             </button>
           </form>
 
           {/* Login / Profile */}
           {isLoggedIn ? (
-            <Link to="/profile" className="text-light me-3 mb-2">
+            <Link
+              to="/profile"
+              className="text-light me-3 mb-2"
+              onClick={handleNavLinkClick}
+            >
               <FaUserCircle size={24} />
             </Link>
           ) : (
-            <Link to="/login" className="btn btn-outline-light  me-2 btn-sm">
+            <Link
+              to="/login"
+              className="btn btn-outline-light  me-2 btn-sm"
+              onClick={handleNavLinkClick}
+            >
               Login
             </Link>
           )}
@@ -113,6 +158,7 @@ const Navbar = () => {
           <Link
             className="text-light text-decoration-none position-relative me-3"
             to="/cart"
+            onClick={handleNavLinkClick}
           >
             <FaShoppingCart size={25} />
             <span className="badge bg-danger bag-item-count">
@@ -124,6 +170,7 @@ const Navbar = () => {
           <Link
             className="text-light text-decoration-none position-relative"
             to="/wishlist"
+            onClick={handleNavLinkClick}
           >
             <FaHeart size={25} />
             <span className="badge bg-danger bag-item-count">
